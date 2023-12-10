@@ -67,9 +67,4 @@ if __name__ == "__main__" :
     if not(myObj.checking_numbers()) :
         # get_input = str(input(">> "))
         get_input = "12+3+(12+3+4/5-(12+4))"
-        dsdsadsdd
-        gdfgjfdgfdklgljkf
-gfdggdfgdfgdfgdfgf
 
-gdfgfdgdfgjhdfkkkk
-dfjgkkkkkkkkkkk
