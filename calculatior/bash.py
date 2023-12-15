@@ -21,8 +21,8 @@ class CalculatorProgramme :
         
         else :
             None
-            NotImplementedError
-                
+
+
     def check_operators(self, ):
         operators = ["+", "-", "*", "/", "//", "**"]
         self.algo_operator = ["(", ")"]
@@ -33,45 +33,59 @@ class CalculatorProgramme :
             self.nan_claculations()
 
     def bracketing(self, ope):
+        self.ope = ope
         fow_bracket = []
         back_bracket = []
-        for f_b in range(0, len(self.user)-1) :
+        for f_b in range(0, len(self.user)) :
             if self.algo_operator[0] in self.user[f_b] :
                 fow_bracket.append(f_b)
             if  self.algo_operator[1] in self.user[f_b] :
                 back_bracket.append(f_b)
-
+        print(fow_bracket)
+        print(back_bracket)
         cur=0
         dis=1
-        back_dub = []
-        back_bracket.append(40)
+        back_dub = set({})
         while(dis<len(back_bracket)) :
             if back_bracket[dis] == back_bracket[cur]+1 :
-                print(dis)
+                back_dub.add(cur)
+                back_dub.add(dis)
                 cur+=1
                 dis+=1
             
             else :
                 cur+=1
                 dis+=1
-    def converter(self, lenth, id) :
-        res = (lenth-(id))*-1
-        return res
-    
-    def catogorizing(self,) :
+        back_dub = list(back_dub)
+        dub = []
         cur=0
         dis=1
-        das=0 
-        cato = []
-        while(dis < len(self.user_n)) :
-            if self.ope in self.user_n[dis] :
-                cato.append(self.user_n[cur:dis+1])
-                cur = dis+1
-                dis = dis+2
-            else :
+        while(dis<len(back_dub)) :
+            if back_dub[dis] == back_dub[cur]+1 :
+                dub.append([back_bracket[back_dub[cur]], back_bracket[back_dub[dis]]])
+                cur+=1
+                dis+=1
+            elif back_dub[dis] != back_dub[cur]+1 :
+                cur=dis
                 dis += 1
-        print(cato)
-        return cato
+            else :
+                cur+=1
+                dis+=1
+        
+        cur=0
+        dis=1
+        while(cur<len(dub)-1) :
+            if dub[cur][-1] == dub[cur+1][0] :
+                del dub[cur][-1]
+                dub[cur].append(dub[cur+1][0])
+                dub[cur].append(dub[cur+1][1])
+                del dub[cur+1]
+                
+
+            else :
+                cur+=1
+                continue
+
 
     def nan_claculations(self, num1, num2, ope) :
         calculations = {
@@ -86,9 +100,9 @@ class CalculatorProgramme :
 
 if __name__ == "__main__" :
     # get_input = str(input(">> "))
-    get_input = "12+3+(4+8)+(80+20)+40+50+((2*4)+(30+40))"
+    get_input = "12+3+(4+8)+(80+20)+40+50+((2*4)+(30+40))+((((5*4)+(3+4))))"
     myObj = CalculatorProgramme(get_input)
     if not(myObj.checking_numbers()) :
         # get_input = str(input(">> "))
-        get_input = "12+3+(4+8)+(80+20)+40+50+((2*4)+(30+40))"
+        get_input = "12+3+(4+8)+(80+20)+40+50+((2*4)+(30+40))+((((5*4)+(3+4))))"
 
