@@ -26,8 +26,15 @@ print(y)
 print(z)
 
 
-p = [[2,3],[4,5]]
-del p[0][1]
-print(p)
-p[0].append(p[1][0])
-print(p)
+p = [1.2,3]
+q=[2,3]
+
+if q in p :
+    p.remove(q)
+    print(p)
+
+
+x = [1,2,3,4,5,[1,3,4]]
+y = [1,2,3,4,5,6]
+x.remove(y[0])
+print(x)
