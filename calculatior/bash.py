@@ -94,7 +94,7 @@ class CalculatorProgramme :
 
     def bracket_broking(self, ) :
         pass
-    
+
     def nan_claculations(self, num1, num2, ope) :
         calculations = {
             "+" : num1+num2,
@@ -108,9 +108,9 @@ class CalculatorProgramme :
 
 if __name__ == "__main__" :
     # get_input = str(input(">> "))
-    get_input = "12+3+(4+8)+(80+20)+40+50+(((((2*4)+(30+40)))))"
+    get_input = "12+3+(4+8)+(80+20)+((2*4)+(30+40))"
     myObj = CalculatorProgramme(get_input)
     if not(myObj.checking_numbers()) :
         # get_input = str(input(">> "))
-         get_input = "12+3+(4+8)+(80+20)+40+50+(((((2*4)+(30+40)))))"
+         get_input = "12+3+(4+8)+(80+20)+40+50+((2*4)+(30+40))"
 
