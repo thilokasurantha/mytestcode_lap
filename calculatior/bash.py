@@ -21,7 +21,8 @@ class CalculatorProgramme :
         
         else :
             None
-                
+
+
     def check_operators(self, ):
         operators = ["+", "-", "*", "/", "//", "**"]
         self.algo_operator = ["(", ")"]
@@ -33,38 +34,83 @@ class CalculatorProgramme :
 
     def bracketing(self, ope):
         self.ope = ope
-        self.idx_s = 0
-        self.idx_e = -1
-
-        while (self.idx_s<=len(self.user)-1) :
-            if (self.user[self.idx_s]==self.ope[0]) :
-                self.idx_s
-                break
-            else :
-                self.idx_s += 1
-
-        while (self.idx_e>=len(self.user)*-1) :
-            if (self.user[self.idx_e]==self.ope[1]) :
-                self.idx_e_re = self.converter(len(self.user)*-1, self.idx_e)
-                break
-
-            else :
-                self.idx_e = self.idx_e+(-1)
-                
+        self.fow_bracket = []
+        self.back_bracket = []
+        for f_b in range(0, len(self.user)) :
+            if self.algo_operator[0] in self.user[f_b] :
+                self.fow_bracket.append(f_b)
+            if  self.algo_operator[1] in self.user[f_b] :
+                self.back_bracket.append(f_b)
+        cur=0
+        dis=1
+        back_dub = set({})
+        while(dis<len(self.back_bracket)) :
+            if self.back_bracket[dis] == self.back_bracket[cur]+1 :
+                back_dub.add(cur)
+                back_dub.add(dis)
+                cur+=1
+                dis+=1
             
-    def converter(self, lenth, id) :
-        res = (lenth-(id))*-1
-        return res
+            else :
+                cur+=1
+                dis+=1
+        back_dub = list(back_dub)
+        self.dub = []
+        cur=0
+        dis=1
+        while(dis<len(back_dub)) :
+            if back_dub[dis] == back_dub[cur]+1 :
+                self.dub.append([self.back_bracket[back_dub[cur]], self.back_bracket[back_dub[dis]]])
+                cur+=1
+                dis+=1
+            elif back_dub[dis] != back_dub[cur]+1 :
+                cur=dis
+                dis += 1
+            else :
+                cur+=1
+                dis+=1
+        
+        cur=0
+        dis=1
+        while(cur<len(self.dub)-1) :
+            if self.dub[cur][-1] == self.dub[cur+1][0] :
+                del self.dub[cur][-1]
+                self.dub[cur].append(self.dub[cur+1][0])
+                self.dub[cur].append(self.dub[cur+1][1])
+                del self.dub[cur+1]
+                
 
-    def nan_claculations(self,) :
-        print("er3")
+            else :
+                cur+=1
+                continue
 
+        for i in range(0, len(self.dub)) :
+            self.back_bracket.append(self.dub[i])
+            for j in range(0, len(self.dub[i])) :
+                self.back_bracket.remove(self.dub[i][j])
+                
+
+        self.bracket_broking()
+
+    def bracket_broking(self, ) :
+        pass
+
+    def nan_claculations(self, num1, num2, ope) :
+        calculations = {
+            "+" : num1+num2,
+            "-" : num1-num2,
+            "*" : num1*num2,
+            "/" : num1/num2,
+            "**" : num1**num2,
+        }
+        return calculations[ope]
+        
 
 if __name__ == "__main__" :
     # get_input = str(input(">> "))
-    get_input = "12+3+(12+3+4/5-(12+4))"
+    get_input = "12+3+(4+8)+(80+20)+((2*4)+(30+40))"
     myObj = CalculatorProgramme(get_input)
     if not(myObj.checking_numbers()) :
         # get_input = str(input(">> "))
-        get_input = "12+3+(12+3+4/5-(12+4))"
+         get_input = "12+3+(4+8)+(80+20)+40+50+((2*4)+(30+40))"
 
